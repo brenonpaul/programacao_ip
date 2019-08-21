@@ -23,6 +23,10 @@ function calculos($mascara, $primeiroOcteto, $segundoOcteto, $terceiroOcteto, $u
         //quantidade de endereços por subrede definida
 
 	$hosts = $qntendsubrede - 2;
+	if ($hosts<0) {
+		$hosts= $hosts * (-1);
+	}
+
         //quantidade hosts por subredes definida
 
         //classe que o ip pertence
@@ -60,8 +64,13 @@ function calculos($mascara, $primeiroOcteto, $segundoOcteto, $terceiroOcteto, $u
 		echo "<h1 style='color: red; border: none'>Ip Inválido</h1>";
 	}else{
 
+	
 		echo "<p><strong> Quantidade de subredes:</strong> $qntdsubrede</p>";
 		echo "<p><strong>Quantidade de hosts em cada subrede:</strong> $hosts </p>";
+		if ($mascara == 32) {
+			echo "<p><u>rede:</u> $primeiroOcteto.$segundoOcteto.$terceiroOcteto.0/$mascara</p>";
+			echo "<p><u>broadcast:</u> $primeiroOcteto. $segundoOcteto.$terceiroOcteto.1/$mascara</p>";
+		}
 		for ($i=1; $i <= $qntdsubrede ; $i++) { 
 			$enderecosRede = -$intervalo*$i;
 			$enderecosRede = $intervalo - $intervalo * $i;
@@ -78,7 +87,14 @@ function calculos($mascara, $primeiroOcteto, $segundoOcteto, $terceiroOcteto, $u
 				echo "<p><u>broadcast:</u><strong> $primeiroOcteto. $segundoOcteto.$terceiroOcteto.$enderecosBroad/$mascara</strong></p>";
 				echo "<p><u>primeiro host:</u><strong> $primeiroOcteto.$segundoOcteto.$terceiroOcteto.$primeirosHosts/$mascara</strong></p>";
 				echo "<p><u>último host:</u><strong> $primeiroOcteto.$segundoOcteto.$terceiroOcteto.$ultimosHost/$mascara</strong></p>";
-			}else{
+			}if ($mascara == 32) {
+				$enderecosRede = $i*2;
+				$enderecosBroad = $enderecosRede+1;
+				echo "<p><strong> $i ° subrede:</strong></p>";
+				echo "<p><u>rede:</u> $primeiroOcteto.$segundoOcteto.$terceiroOcteto.$enderecosRede/$mascara</p>";
+				echo "<p><u>broadcast:</u> $primeiroOcteto. $segundoOcteto.$terceiroOcteto.$enderecosBroad/$mascara</p>";
+
+			} else{
 				echo "<p><strong> $cont ° subrede:</strong></p>";
 				echo "<p><u>rede:</u> $primeiroOcteto.$segundoOcteto.$terceiroOcteto.$enderecosRede/$mascara</p>";
 				echo "<p><u>broadcast:</u> $primeiroOcteto. $segundoOcteto.$terceiroOcteto.$enderecosBroad/$mascara</p>";
