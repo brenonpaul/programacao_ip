@@ -26,7 +26,6 @@ function calculos($mascara, $primeiroOcteto, $segundoOcteto, $terceiroOcteto, $u
 	if ($hosts<0) {
 		$hosts= $hosts * (-1);
 	}
-
         //quantidade hosts por subredes definida
 
         //classe que o ip pertence
@@ -34,25 +33,24 @@ function calculos($mascara, $primeiroOcteto, $segundoOcteto, $terceiroOcteto, $u
 		$classe = "Classe A";
 		if ($primeiroOcteto == 10) {
 			$o = "Privado";
-		} else {
+		}else {
 			$o = "Público";
 		}
-
-	} elseif ($primeiroOcteto <= 191 and $primeiroOcteto >= 128) {
+	}elseif ($primeiroOcteto <= 191 and $primeiroOcteto >= 128) {
 		$classe = "Classe B";
 		if ($primeiroOcteto == 172 and $segundoOcteto >= 16 and $segundoOcteto <= 31) {
 			$o = "Privado";
 		} else {
 			$o = "Público";
 		}
-	} elseif ($primeiroOcteto <= 223 and $primeiroOcteto >= 192) {
+	}elseif ($primeiroOcteto <= 223 and $primeiroOcteto >= 192) {
 		$classe = "Classe C";
 		if ($primeiroOcteto == 192 and $segundoOcteto == 168) {
 			$o = "Privado";
 		} else {
 			$o = "Público";
 		}
-	} elseif ($primeiroOcteto <= 239 and $primeiroOcteto >= 224) {
+	}elseif ($primeiroOcteto <= 239 and $primeiroOcteto >= 224) {
 		$classe = "Classe D";
 		$o = "Público";
 	} elseif ($primeiroOcteto <= 255 and $primeiroOcteto >= 240) {
@@ -60,17 +58,16 @@ function calculos($mascara, $primeiroOcteto, $segundoOcteto, $terceiroOcteto, $u
 		$o = "Público";
 	}
 
-	if ($primeiroOcteto>255 or $segundoOcteto>255 or $terceiroOcteto>255 or$ultimoOcteto>255 or $mascara> 32) {
+	if ($primeiroOcteto>255 or $segundoOcteto>255 or $terceiroOcteto>255 or$ultimoOcteto>255 or $primeiroOcteto<0 or $segundoOcteto<0 or $terceiroOcteto<0 or $ultimoOcteto<0 or $mascara> 32 or $mascara < 24) {
 		echo "<h1 style='color: red; border: none'>Ip Inválido</h1>";
 	}else{
-
-	
-		echo "<p><strong> Quantidade de subredes:</strong> $qntdsubrede</p>";
+		echo "<p><strong> Quantidade de Subredes:</strong> $qntdsubrede</p>";
 		echo "<p><strong>Quantidade de hosts em cada subrede:</strong> $hosts </p>";
-		if ($mascara == 32) {
-			echo "<p><u>rede:</u> $primeiroOcteto.$segundoOcteto.$terceiroOcteto.0/$mascara</p>";
-			echo "<p><u>broadcast:</u> $primeiroOcteto. $segundoOcteto.$terceiroOcteto.1/$mascara</p>";
-		}
+		echo "<p><strong>Máscara decimal:</strong> $mascaraA</p>";
+		echo "<p><strong>Classe da rede:</strong> $classe</strong></p>";
+		echo "<p><strong>Ip de rede:</strong> ". $o. "</p>";
+		echo "<div style='border: 2px solid #ccc'></div>";
+		
 		for ($i=1; $i <= $qntdsubrede ; $i++) { 
 			$enderecosRede = -$intervalo*$i;
 			$enderecosRede = $intervalo - $intervalo * $i;
@@ -82,34 +79,31 @@ function calculos($mascara, $primeiroOcteto, $segundoOcteto, $terceiroOcteto, $u
 			$ipInformado = $ip;
 
 			if ($enderecosRede < $ultimoOcteto and $ultimoOcteto < $enderecosBroad) {
-				echo "<p><strong> $cont ° subrede:</strong></p>";
-				echo "<p><u>rede:</u><strong> $primeiroOcteto.$segundoOcteto.$terceiroOcteto.$enderecosRede/$mascara</strong></p>";
-				echo "<p><u>broadcast:</u><strong> $primeiroOcteto. $segundoOcteto.$terceiroOcteto.$enderecosBroad/$mascara</strong></p>";
-				echo "<p><u>primeiro host:</u><strong> $primeiroOcteto.$segundoOcteto.$terceiroOcteto.$primeirosHosts/$mascara</strong></p>";
-				echo "<p><u>último host:</u><strong> $primeiroOcteto.$segundoOcteto.$terceiroOcteto.$ultimosHost/$mascara</strong></p>";
-			}if ($mascara == 32) {
-				$enderecosRede = $i*2;
-				$enderecosBroad = $enderecosRede+1;
-				echo "<p><strong> $i ° subrede:</strong></p>";
-				echo "<p><u>rede:</u> $primeiroOcteto.$segundoOcteto.$terceiroOcteto.$enderecosRede/$mascara</p>";
-				echo "<p><u>broadcast:</u> $primeiroOcteto. $segundoOcteto.$terceiroOcteto.$enderecosBroad/$mascara</p>";
+				echo "<p><strong> $cont ° Subrede:</strong></p>";
+				echo "<strong><p><u>Rede:</u> $primeiroOcteto.$segundoOcteto.$terceiroOcteto.$enderecosRede/$mascara</strong></p>";
+				echo "<strong><p><u>Broadcast:</u> $primeiroOcteto. $segundoOcteto.$terceiroOcteto.$enderecosBroad/$mascara</strong></p>";
+				echo "<strong><p><u>Primeiro host:</u> $primeiroOcteto.$segundoOcteto.$terceiroOcteto.$primeirosHosts/$mascara</strong></p>";
+				echo "<strong><p><u>Último host:</u> $primeiroOcteto.$segundoOcteto.$terceiroOcteto.$ultimosHost/$mascara</strong></p>";
+				echo "<div style='border: 2px solid #ccc'></div>";
+			}elseif ($mascara == 31) {
+				echo "<p><strong> $i ° Subrede:</strong></p>";
+				echo "<p><u>Rede:</u> $primeiroOcteto.$segundoOcteto.$terceiroOcteto.$enderecosRede/$mascara</p>";
+				echo "<p><u>Broadcast:</u> $primeiroOcteto.$segundoOcteto.$terceiroOcteto.$enderecosBroad/$mascara</p>";
+				echo "<div style='border: 2px solid #ccc'></div>";
 
+			}elseif ($mascara == 32) {
+				$j= $i-1;
+				echo "<p><u>Host:</u> $primeiroOcteto.$segundoOcteto.$terceiroOcteto.$j/$mascara</p>";
 			} else{
-				echo "<p><strong> $cont ° subrede:</strong></p>";
-				echo "<p><u>rede:</u> $primeiroOcteto.$segundoOcteto.$terceiroOcteto.$enderecosRede/$mascara</p>";
-				echo "<p><u>broadcast:</u> $primeiroOcteto. $segundoOcteto.$terceiroOcteto.$enderecosBroad/$mascara</p>";
-				echo "<p><u>primeiro host:</u> $primeiroOcteto.$segundoOcteto.$terceiroOcteto.$primeirosHosts/$mascara </p>";
-				echo "<p><u>último host:</u> $primeiroOcteto.$segundoOcteto.$terceiroOcteto.$ultimosHost/$mascara </p>";
+				echo "<p><strong> $cont ° Subrede:</strong></p>";
+				echo "<p><u>Rede:</u> $primeiroOcteto.$segundoOcteto.$terceiroOcteto.$enderecosRede/$mascara</p>";
+				echo "<p><u>Broadcast:</u> $primeiroOcteto. $segundoOcteto.$terceiroOcteto.$enderecosBroad/$mascara</p>";
+				echo "<p><u>Primeiro host:</u> $primeiroOcteto.$segundoOcteto.$terceiroOcteto.$primeirosHosts/$mascara </p>";
+				echo "<p><u>Último host:</u> $primeiroOcteto.$segundoOcteto.$terceiroOcteto.$ultimosHost/$mascara </p>";
+				echo "<div style='border: 2px solid #ccc'></div>";
 			}
-
 		}
-
-		echo "<p><strong>Máscara decimal:</strong> $mascaraA</p>";
-		echo "<p><strong>Classe da rede:</strong> $classe</strong></p>";
-		echo "<p><strong>Ip de rede:</strong> ". $o. "</p>";
-
 	}
-
 }
 
 calculos($mascara,$primeiroOcteto,$segundoOcteto, $terceiroOcteto, $ultimoOcteto, $bits);

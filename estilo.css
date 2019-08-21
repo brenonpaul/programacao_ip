@@ -24,6 +24,9 @@ form{
     text-align: center;
     height: 10px;
 }
+b{
+    font-size: 30px;
+}
 
 .inputs{
     width: 3%;
