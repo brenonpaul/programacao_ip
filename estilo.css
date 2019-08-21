@@ -1,0 +1,58 @@
+#body {
+    background-color: #B0C4DE;
+    text-align: center;
+    color: black;
+}
+p{
+    color: black;
+    font-family: Arial;
+}
+
+h1{
+    color: black;
+    font-family: Arial;
+    border: dotted;
+    padding: 1%;
+}
+
+input {
+    width: 50px;
+    padding: 5px;
+}
+
+form{
+    text-align: center;
+    height: 10px;
+}
+
+.inputs{
+    width: 3%;
+    border: 1px solid;
+    border-radius: 5px;
+    color: black;
+    padding: 0.5%;
+}
+#mascara{
+    width: 2.5%;
+    border: 1px solid;
+    padding: 0.5%;
+    border-radius: 5px;
+}
+#botao{
+    width: 4%;
+    background-color: #32CD32;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 0.5%;
+    color: white;
+}
+
+#conteudo{
+    border: white;
+}
+
+#formulario{
+    margin-top: 5%;
+    margin-bottom: 3%;
+}
+
