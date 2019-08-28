@@ -26,7 +26,7 @@
 </head>
 <body id="body">
 
-    <h1 style="margin-top: 1%">Descubra as informações de seu IP:</h1>
+    <h1 style="margin-top: 1%">Descubra as informações de seu IP(barramento 24 ao 32):</h1>
 
     <div id="input">
         <form method="post" id="formulario">

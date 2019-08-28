@@ -36,7 +36,16 @@ function calculos($mascara, $primeiroOcteto, $segundoOcteto, $terceiroOcteto, $u
 		}else {
 			$o = "Público";
 		}
-	}elseif ($primeiroOcteto <= 191 and $primeiroOcteto >= 128) {
+	}elseif($primeiroOcteto == 127){
+		echo("<h2>");
+		exit('ip reservado');
+		echo("</h2>");
+	}elseif($primeiroOcteto == 169 and $segundoOcteto == 254){
+		echo("<h2>");
+		exit('ip reservado');
+		echo("</h2>");
+	}
+	elseif ($primeiroOcteto <= 191 and $primeiroOcteto >= 128) {
 		$classe = "Classe B";
 		if ($primeiroOcteto == 172 and $segundoOcteto >= 16 and $segundoOcteto <= 31) {
 			$o = "Privado";
